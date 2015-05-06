@@ -1,10 +1,11 @@
 class Event < ActiveRecord::Base
   require 'csv'
+  belongs_to :task
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
 
-      event_hash = row.to_hash 
+      event_hash = row.to_hash
       event = Event.where(id: event_hash["id"])
 
       if event.count == 1
@@ -14,4 +15,8 @@ class Event < ActiveRecord::Base
       end
     end
   end
+
+
+
+
 end
