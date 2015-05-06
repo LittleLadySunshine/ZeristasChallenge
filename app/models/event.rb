@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
 
-      event_hash = row.to_hash # exclude the price field
+      event_hash = row.to_hash 
       event = Event.where(id: event_hash["id"])
 
       if event.count == 1
